@@ -53,6 +53,10 @@ To replicate this project, follow these steps:
 
 2. **Dashboard Design**: Describe the elements, visualizations, and insights presented in your Tableau dashboard. Share any Tableau-specific tips or tricks used.
 
+## Dashboard link
+
+https://www.novypro.com/project/sales-insights-dashboard-10
+
 ## Dependencies
 
 List the major dependencies and libraries used in this project, including versions. This helps others understand the tools and technologies required to replicate your work.
