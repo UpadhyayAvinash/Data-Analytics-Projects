@@ -112,4 +112,9 @@ Insights
 2. Begaluru market is making the most of the loss with customer Flawless Stores contributing the most. 
 3. Delhi contributes most to the company's Revenue and profit.
 4. Revenue is declining based on YoY trend.
-   
+
+
+Dashboard link
+============================
+
+https://www.novypro.com/project/sales-insights-dashboard-10
