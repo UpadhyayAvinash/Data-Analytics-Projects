@@ -55,7 +55,7 @@ To replicate this project, follow these steps:
 
 ## Dashboard link
 
-https://www.novypro.com/project/sales-insights-dashboard-10
+(https://public.tableau.com/app/profile/avinash.upadhyay1478/viz/YouTube_dashboard/Dashboard3_c)
 
 ## Dependencies
 
