@@ -131,7 +131,7 @@ Insights
 
 1. Peak hours are between 12PM to 1PM and in evening 5PM to 7PM.
 2. Significant variations in the weekly orders, with highest peak during the 48th week from the month of dec.
-3. Classis Catgeory contributes to highest sales, total orders and total pizza sold.
+3. Classis Category contributes to highest sales, total orders and total pizza sold.
 4. Large pizza size contributes to maximum total sales.
 5. Thai Chicken pizza contributes to maximum revenue.
 6. The Classic Deluxe pizza contributes to maximum pizzas sold.
