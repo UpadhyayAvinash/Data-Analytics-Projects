@@ -136,7 +136,7 @@ Insights
 5. Thai Chicken pizza contributes to maximum revenue.
 6. The Classic Deluxe pizza contributes to maximum pizzas sold.
 7. The Classic Deluxe pizza contributes to maximum pizzas orders.
-8. The Brie Carre pizza contributes to minimum revenue, pizzas sold and pizzas orders
+8. The Brie Carre pizza contributes to minimum revenue, pizzas sold and pizzas orders.
 
 Tableau Dashboard link
 ============================
