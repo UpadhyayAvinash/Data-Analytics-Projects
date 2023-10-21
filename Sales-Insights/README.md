@@ -10,7 +10,7 @@
 1. It contained the sales data of 2017 to 2020.
 1. It Consisted of 1 Fact table and 4 Dimension Tables.
 1. The data source was in MySQL Database.
-1. There are 3 main KPIs ales Revenue, sales Quantity and profit margin across various dimensions.
+1. There are 3 main KPIs Revenue, sales Quantity and profit margin across various dimensions.
 
 ### Data Analysis Using SQL
 
