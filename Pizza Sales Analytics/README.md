@@ -7,31 +7,36 @@
 
 ## About the data
 1. The Pizza Sales Dashboard was built using the dataset provided by Data Tutorials Youtube channel.
-1. It contained the sales data of Pizza for year 2015.
-1. It Consisted of 1 Fact table.
+1. It contains sales data of Pizza for year 2015.
+1. It consists of 1 Fact table.
 1. The data was ingested into MS SQL server and was used as source for dashboard.
-1. There are 3 main KPIs Revenue, Quantity sold and profit total number of orders across various dimensions.
+1. There are 3 main KPIs Revenue, Quantity sold and total number of orders across various dimensions.
 
 ## Data Analysis Using SQL
 
 ### A. KPI’s
 
 1. Total Revenue:
+   
 `SELECT SUM(total_price) AS Total_Revenue 
 FROM [pizzaDB].[dbo].[pizza_sales];`
  
 1. Average Order Value
+   
 `SELECT (SUM(total_price) / COUNT(DISTINCT order_id)) AS Avg_order_Value FROM [pizzaDB].[dbo].[pizza_sales]`
  
 1. Total Pizzas Sold
+   
 `SELECT SUM(quantity) AS Total_pizza_sold 
 FROM [pizzaDB].[dbo].[pizza_sales]`
  
 1. Total Orders
+   
 `SELECT COUNT(DISTINCT order_id) AS Total_Orders 
 FROM [pizzaDB].[dbo].[pizza_sales]`
  
 1. Average Pizzas Per Order
+   
 `SELECT CAST(SUM(quantity)*1.0 --multiply with 1.0 to covert int data to float
 /COUNT(DISTINCT order_id) AS DECIMAL(10,2))
 AS Avg_Pizzas_per_order
@@ -124,11 +129,14 @@ ORDER BY Total_Orders ASC`
 Insights
 ============================
 
-1. Surat is the most profitable city leading by 4.86%.
-2. Begaluru market is making the most of the loss with customer Flawless Stores contributing the most. 
-3. Delhi contributes most to the company's Revenue and profit.
-4. Revenue is declining based on YoY trend.
-
+1. Peak hours are between 12PM to 1PM and in evening 5PM to 7PM.
+2. Significant variations in the weekly orders, with highest peak during the 48th week from the month of dec.
+3. Classis Catgeory contributes to highest sales, total orders and total pizza sold.
+4. Large pizza size contributes to maximum total sales.
+5. Thai Chicken pizza contributes to maximum revenue.
+6. The Classic Deluxe pizza contributes to maximum pizzas sold.
+7. The Classic Deluxe pizza contributes to maximum pizzas orders.
+8. The Brie Carre pizza contributes to minimum revenue, pizzas sold and pizzas orders
 
 Tableau Dashboard link
 ============================
