@@ -53,7 +53,7 @@ To replicate this project, follow these steps:
 
 2. **Dashboard Design**: Describe the elements, visualizations, and insights presented in your Tableau dashboard. Share any Tableau-specific tips or tricks used.
 
-## Dashboard link
+## Tableau Dashboard link
 
 (https://public.tableau.com/app/profile/avinash.upadhyay1478/viz/YouTube_dashboard/Dashboard3_c)
 
