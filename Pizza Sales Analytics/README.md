@@ -14,130 +14,37 @@
 
 ## Data Analysis Using SQL
 
-1. Select the database
-
-    `USE sales`
-
-1. Show all customer records
-
-    `SELECT * FROM customers;`
-
-1. Show total number of customers
-
-    `SELECT count(*) FROM customers;`
-
-1. Show transactions for Chennai market (market code for chennai is Mark001)
-
-    `SELECT * FROM transactions where market_code='Mark001';`
-
-1. Show distrinct product codes that were sold in chennai
-
-    `SELECT distinct product_code FROM transactions where market_code='Mark001';`
-
-1. All transactions where currency is US dollars
-
-    `SELECT * from transactions where currency="USD"`
-
-1. Transactions in 2020 join by date table
-
-    `SELECT t.*, d.* 
-FROM transactions t
-INNER JOIN date d
-ON t.order_date=d.date 
-where d.year=2020;`
-
-1. Total revenue in year 2020,
-
-    `SELECT SUM(t.sales_amount) total_revenue
-FROM transactions t
-INNER JOIN date d
-ON t.order_date=d.date 
-where d.year=2020 
-and t.currency="INR" or t.currency="USD";`
-	
-1. Total revenue in year 2020, January Month,
-
-    `SELECT SUM(t.sales_amount) total_revenue
-FROM transactions t
-INNER JOIN date d
-ON t.order_date=d.date 
-where d.year=2020 and d.month_name="January"
-and t.currency="INR" or t.currency="USD";`
-
-1. Total revenue in year 2020 in Chennai
-
-    `SELECT SUM(t.sales_amount) total_rev
-FROM transactions t
-INNER JOIN date d
-ON t.order_date=d.date 
-where d.year=2020 
-and t.market_code="Mark001";`
-
-1. Different market revenue collection by year
-   
-   `SELECT d.year,m.markets_name,sum(t.sales_amount) total_rev 
-FROM transactions t 
-LEFT JOIN date d
-ON t.order_date=d.date  
-LEFT JOIN markets m
-ON t.market_code = m.markets_code
-GROUP BY 1,2
-ORDER BY 2,1;`
-
-1. Proudct type peformance over the years
-
-   `SELECT d.year,p.product_type,sum(t.sales_amount) total_rev 
-FROM transactions t 
-LEFT JOIN date d
-ON t.order_date=d.date  
-LEFT JOIN products p
-ON t.product_code = p.product_code
-WHERE p.product_code IS NOT NULL
-GROUP BY 1,2
-ORDER BY 2,1;`
-
-
 ### A. KPI’s
 
 1. Total Revenue:
-SELECT SUM(total_price) AS Total_Revenue 
-FROM [pizzaDB].[dbo].[pizza_sales];
+`SELECT SUM(total_price) AS Total_Revenue 
+FROM [pizzaDB].[dbo].[pizza_sales];`
  
-
-2. Average Order Value
-SELECT (SUM(total_price) / COUNT(DISTINCT order_id)) AS Avg_order_Value FROM [pizzaDB].[dbo].[pizza_sales]
+1. Average Order Value
+`SELECT (SUM(total_price) / COUNT(DISTINCT order_id)) AS Avg_order_Value FROM [pizzaDB].[dbo].[pizza_sales]`
  
-
-3. Total Pizzas Sold
-SELECT SUM(quantity) AS Total_pizza_sold 
-FROM [pizzaDB].[dbo].[pizza_sales]
+1. Total Pizzas Sold
+`SELECT SUM(quantity) AS Total_pizza_sold 
+FROM [pizzaDB].[dbo].[pizza_sales]`
  
-
-4. Total Orders
-SELECT COUNT(DISTINCT order_id) AS Total_Orders 
-FROM [pizzaDB].[dbo].[pizza_sales]
+1. Total Orders
+`SELECT COUNT(DISTINCT order_id) AS Total_Orders 
+FROM [pizzaDB].[dbo].[pizza_sales]`
  
-
-
-5. Average Pizzas Per Order
-SELECT CAST(SUM(quantity)*1.0 --multiply with 1.0 to covert int data to float
+1. Average Pizzas Per Order
+`SELECT CAST(SUM(quantity)*1.0 --multiply with 1.0 to covert int data to float
 /COUNT(DISTINCT order_id) AS DECIMAL(10,2))
 AS Avg_Pizzas_per_order
-FROM [pizzaDB].[dbo].[pizza_sales];
-
- 
-
+FROM [pizzaDB].[dbo].[pizza_sales];`
 
 ### B. Hourly Trend for Total Pizzas Sold
-SELECT DATEPART(HOUR, order_time) as order_hours, SUM(quantity) as total_pizzas_sold
+`SELECT DATEPART(HOUR, order_time) as order_hours, SUM(quantity) as total_pizzas_sold
 FROM [pizzaDB].[dbo].[pizza_sales]
 group by DATEPART(HOUR, order_time)
-order by DATEPART(HOUR, order_time)
-Output
- 
+order by DATEPART(HOUR, order_time)`
 
 ### C. Weekly Trend for Orders
-SELECT 
+`SELECT 
     DATEPART(ISO_WEEK, order_date) AS WeekNumber,
     YEAR(order_date) AS Year,
     COUNT(DISTINCT order_id) AS Total_orders
@@ -147,103 +54,72 @@ GROUP BY
     DATEPART(ISO_WEEK, order_date),
     YEAR(order_date)
 ORDER BY 
-    Year, WeekNumber;
-
-          
-
-
-
+    Year, WeekNumber;`
 
 ### D. % of Sales by Pizza Category
-SELECT pizza_category, CAST(SUM(total_price) AS DECIMAL(10,2)) as total_revenue,
+`SELECT pizza_category, CAST(SUM(total_price) AS DECIMAL(10,2)) as total_revenue,
 CAST(SUM(total_price) * 100 / (SELECT SUM(total_price) 
 FROM [pizzaDB].[dbo].[pizza_sales]) AS DECIMAL(10,2)) AS PCT
 FROM [pizzaDB].[dbo].[pizza_sales]
-GROUP BY pizza_category
-Output
- 
+GROUP BY pizza_category`
 
 ### E. % of Sales by Pizza Size
-SELECT pizza_size, CAST(SUM(total_price) AS DECIMAL(10,2)) as total_revenue,
+`SELECT pizza_size, CAST(SUM(total_price) AS DECIMAL(10,2)) as total_revenue,
 CAST(SUM(total_price) * 100 / (SELECT SUM(total_price) FROM [pizzaDB].[dbo].[pizza_sales]) AS DECIMAL(10,2)) AS PCT
 FROM [pizzaDB].[dbo].[pizza_sales]
 GROUP BY pizza_size
-ORDER BY pizza_size
-Output
- 
+ORDER BY pizza_size`
 
 ### F. Total Pizzas Sold by Pizza Category
-SELECT pizza_category, SUM(quantity) as Total_Quantity_Sold
+`SELECT pizza_category, SUM(quantity) as Total_Quantity_Sold
 FROM [pizzaDB].[dbo].[pizza_sales]
 WHERE MONTH(order_date) = 2
 GROUP BY pizza_category
-ORDER BY Total_Quantity_Sold DESC
-Output
- 
+ORDER BY Total_Quantity_Sold DESC`
 
 ### G. Top 5 Pizzas by Revenue
-SELECT Top 5 pizza_name, SUM(total_price) AS Total_Revenue
+`SELECT Top 5 pizza_name, SUM(total_price) AS Total_Revenue
 FROM [pizzaDB].[dbo].[pizza_sales]
 GROUP BY pizza_name
-ORDER BY Total_Revenue DESC
+ORDER BY Total_Revenue DESC`
  
-
-
-
 ### H. Bottom 5 Pizzas by Revenue
-SELECT Top 5 pizza_name, SUM(total_price) AS Total_Revenue
+`SELECT Top 5 pizza_name, SUM(total_price) AS Total_Revenue
 FROM [pizzaDB].[dbo].[pizza_sales]
 GROUP BY pizza_name
-ORDER BY Total_Revenue ASC
+ORDER BY Total_Revenue ASC`
  
-
 ### I. Top 5 Pizzas by Quantity
-SELECT Top 5 pizza_name, SUM(quantity) AS Total_Pizza_Sold
+`SELECT Top 5 pizza_name, SUM(quantity) AS Total_Pizza_Sold
 FROM [pizzaDB].[dbo].[pizza_sales]
 GROUP BY pizza_name
-ORDER BY Total_Pizza_Sold DESC
-Output
- 
+ORDER BY Total_Pizza_Sold DESC`
 
 ### J. Bottom 5 Pizzas by Quantity
-SELECT TOP 5 pizza_name, SUM(quantity) AS Total_Pizza_Sold
+`SELECT TOP 5 pizza_name, SUM(quantity) AS Total_Pizza_Sold
 FROM [pizzaDB].[dbo].[pizza_sales]
 GROUP BY pizza_name
-ORDER BY Total_Pizza_Sold ASC
-Output
- 
+ORDER BY Total_Pizza_Sold ASC`
 
 ### K. Top 5 Pizzas by Total Orders
-SELECT Top 5 pizza_name, COUNT(DISTINCT order_id) AS Total_Orders
+`SELECT Top 5 pizza_name, COUNT(DISTINCT order_id) AS Total_Orders
 FROM [pizzaDB].[dbo].[pizza_sales]
 GROUP BY pizza_name
-ORDER BY Total_Orders DESC
+ORDER BY Total_Orders DESC`
  
-
 ### L. Borrom 5 Pizzas by Total Orders
-SELECT Top 5 pizza_name, COUNT(DISTINCT order_id) AS Total_Orders
+`SELECT Top 5 pizza_name, COUNT(DISTINCT order_id) AS Total_Orders
 FROM [pizzaDB].[dbo].[pizza_sales]
 GROUP BY pizza_name
-ORDER BY Total_Orders ASC
+ORDER BY Total_Orders ASC`
  
 ### NOTE
 If you want to apply the pizza_category or pizza_size filters to the above queries you can use WHERE clause. Follow some of below examples
-SELECT Top 5 pizza_name, COUNT(DISTINCT order_id) AS Total_Orders
+`SELECT Top 5 pizza_name, COUNT(DISTINCT order_id) AS Total_Orders
 FROM [pizzaDB].[dbo].[pizza_sales]
 WHERE pizza_category = 'Classic'
 GROUP BY pizza_name
-ORDER BY Total_Orders ASC
-
-
-
-
-Data Analysis Using Power BI
-============================
-
-1. Formula to create norm_sales_amount column
-
-`= Table.AddColumn(sales_transactions, "norm_sales_amount", each if [currency] = "USD" then [sales_amount]*83 else [sales_amount])`
-
+ORDER BY Total_Orders ASC`
 
 Insights
 ============================
@@ -254,7 +130,7 @@ Insights
 4. Revenue is declining based on YoY trend.
 
 
-Dashboard link
+Tableau Dashboard link
 ============================
 
-https://www.novypro.com/project/sales-insights-dashboard-10
+https://public.tableau.com/views/pizzasalesdashboard_16978746123690/Home?:language=en-US&:display_count=n&:origin=viz_share_link
